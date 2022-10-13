@@ -43,12 +43,14 @@ def fill(dbname):
     c.execute("INSERT INTO Product VALUES (0,'Apple', 1.00, 1, 'The fruit of an apple tree');")
     c.execute("INSERT INTO Product VALUES (1,'Cabbage', 0.50, 2, 'A cultivated plant eaten as a vegetable, having thick green or purple leaves surrounding a spherical heart or head of young leaves');")
     c.execute("INSERT INTO Product VALUES (2,'Bread', 1.50, 0, 'Food made of flour, water, and yeast or another leavening agent, mixed together and baked');")
+    c.execute("SELECT Category.idCategory FROM Category JOIN Product ON Product.CategoryID=Category.rowid")
     
     # Store_Product    
     c.execute("INSERT INTO Store_Product VALUES (1,1,10);")
     c.execute("INSERT INTO Store_Product VALUES (2,2,15);")
     c.execute("INSERT INTO Store_Product VALUES (0,0,5);")
     c.execute("SELECT Product.idProduct FROM Product JOIN Store_Product ON Store_Product.ProductID=Product.rowid")
+    c.execute("SELECT Store.idStore FROM Store JOIN Store_Product ON Store_Product.StoreID=Store.rowid")
 
     conn.commit() 
     conn.close()
@@ -69,7 +71,7 @@ def print_tables(dbname):
             print ("\t\t", attr)
             
             
-    result = c.execute("SELECT * FROM Category;")
+    result = c.execute("SELECT * FROM Product;")
     print(c.fetchall())
 
 
