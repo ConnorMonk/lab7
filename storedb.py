@@ -73,14 +73,27 @@ def print_tables(dbname):
             
     result = c.execute("SELECT * FROM Product;")
     print(c.fetchall())
-
+    
+def addProduct(dbName, productName, price, categoryID, description):
+        
+        conn = sqlite3.connect(dbName)
+        c = conn.cursor()
+        # c.execute("SELECT name FROM Category where idCategory=(?)", categoryID)
+        # prodID = c.fetchall()
+        # print(type(prodID))
+        c.execute("INSERT INTO Product VALUES (5,?, ?, ?, ?);", (productName, price, categoryID, description))
+        
+        conn.commit()
+        conn.close()
 
 
 if __name__ == "__main__":     
     
     dbname = "mydb"
-    
     thedb = create(dbname)
     fill(dbname)
+    print_tables(dbname)
+    
+    addProduct("mydb", "bolo", 3.90, 1, "smells bad")
     print_tables(dbname)
     
